@@ -6,14 +6,19 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var swig = require('swig');
 
 var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
+
+
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'server/views'));
-app.set('view engine', 'jade');
 //app.set('view cache', true);
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
