@@ -1,0 +1,73 @@
+{% extends 'auth.html' %}
+
+{% block auth %}
+<div>
+  <h2>Deliver Your Discount &amp; Promotion to Customers at Real Time!</h1>
+</div>
+<div>
+  <h3>Login</h1>
+  <form action="/users/session" method="post" class="login form-horizontal">
+    <fieldset>
+      <legend>Existing User</legend>
+    <p class="error"></p>
+    <div class="control-group">
+      <label for="email" class="control-label">Email</label>
+      <div class="controls">
+        <input id="email" type="text" name="email" placeholder="Email">
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="password" class="control-label">Password</label>
+      <div class="controls">
+        <input id="password" type="password" name="password" placeholder="Password">
+      </div>
+    </div>
+    <br>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Login</button>&nbsp;
+      or
+    </div>
+    </fieldset>
+  </form>
+</div>
+  
+  {% include '../includes/errors.html' %}
+
+<div>
+  <h3>Sign Up</h1>
+
+    <form action="/users/create" method="post" class="signup form-horizontal">
+      <fieldset>
+        <legend>New User</legend>
+    <div class="control-group">
+      <label for="name" class="control-label">Full name</label>
+      <div class="controls">
+        <input id="name" type="text" name="name" placeholder="Full name" value="{{user.name}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="email" class="control-label">Email</label>
+      <div class="controls">
+        <input id="email" type="text" name="email" placeholder="Email" value="{{user.email}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="username" class="control-label">Username</label>
+      <div class="controls">
+        <input id="username" type="text" name="username" placeholder="Username" value="{{user.username}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="password" class="control-label">Password</label>
+      <div class="controls">
+        <input id="password" type="password" name="password" placeholder="Password">
+      </div>
+    </div>
+        <br>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Sign up</button>&nbsp;
+    </div>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

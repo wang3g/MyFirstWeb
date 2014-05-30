@@ -1,6 +1,18 @@
-{% extends 'layout.html' %}
+{% extends './layout.html' %}
 
-{% block content %}
-  <h1>{{ title }}</h1>
-  <p> Welcome to {{title}} </p>
+{% block main %}
+  <div>
+    <p>Below are shops having dicount &amp; promotion right now, or</p>
+    <p>input postcode to find shops in other area.</p>
+    <form action='/'>
+      <input type="text" placeholder="Postcode" name="postcode">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div>
+    <p> This contains the list of shops</p>
+  </div>
+
+
 {% endblock %}

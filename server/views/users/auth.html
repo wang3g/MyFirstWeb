@@ -1,0 +1,20 @@
+{% extends '../layout.html' %}
+
+
+{% block content %}
+  <div>
+<!--
+    <div class="offset1 span5">
+      <a href="/auth/facebook"><img src="/img/facebook.png"></a>
+      <a href="/auth/github"><img src="/img/github.png"></a>
+      <a href="/auth/twitter"><img src="/img/twitter.png"></a>
+      <a href="/auth/google"><img src="/img/google.png"></a>
+    </div>
+-->
+    <div>
+      {% block auth %}
+      {% endblock %}
+
+    </div>
+  </div>
+{% endblock %}

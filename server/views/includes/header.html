@@ -1,0 +1,18 @@
+
+<header id="header">
+  <div class="navbar navbar-fixed-top">
+    <div>
+      <a href="/">Find Today's Discount!</a>
+    </div>
+
+    <div>
+      {% if (req.isAuthenticated()) %}
+        <a href="/users/{{req.user.id}}" title="Profile">Profile</a></li>
+        <a href="/logout" title="logout">Logout</a>
+      {% else %}
+        <a href="/users" title="login">Business Users</a>
+      {% endif %}
+    </div>  
+
+  </div>
+</header>
