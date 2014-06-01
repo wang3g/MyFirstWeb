@@ -1,4 +1,4 @@
-{% extends 'auth.html' %}
+{% extends './auth.html' %}
 
 {% block auth %}
 <div>
@@ -6,6 +6,11 @@
 </div>
 <div>
   <h3>Login</h1>
+      
+  {% if (loginMessage.length > 0) %}
+    <div class="alert alert-danger">{{loginMessage}}</div>
+  {% endif %}
+
   <form action="/users/session" method="post" class="login form-horizontal">
     <fieldset>
       <legend>Existing User</legend>

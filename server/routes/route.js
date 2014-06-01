@@ -10,20 +10,23 @@ module.exports = function (app, passport, auth) {
 	app.get('/users', users.loginOrSignup);
 
 	//Process the Login form
-	app.post('/users/session', passport.authenticate('local', {failureRedirect: '/users', failureFlash: 'Invalid email or password.'}), users.session);
-    
+	app.post('/users/session', passport.authenticate('local', {
+     //   successRedirect : '/users/dwwwd', // redirect to the secure profile section
+        failureRedirect: '/users', // redirect back to the login page if there is an error
+        failureFlash: true // allow flash messages
+    }), users.session);
+
     //Process the SignUp form
     app.post('/users/create', users.create);
 
     //Process logout
     app.get('/logout', users.logout);
 
+    //Show business user's profile
+    app.get('/users/:userId', users.show);
+
 /*
-    app.get('/login', users.login);
-    app.get('/signup', users.signup);
-    
-    
-        app.get('/users/:userId', users.show);
+      
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/login' }), users.signin);
     app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), users.authCallback);
     app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/login' }), users.signin);

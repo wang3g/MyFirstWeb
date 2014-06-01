@@ -1,6 +1,5 @@
       {% if errors %}
-        <div class="fade in alert alert-block alert-error">
-          <a href="javascript:void(0)" data-dismiss="alert" class="close"></a>
+        <div class="alert alert-danger">
           <ul>
             {% for error in errors %}
               <li>{{error.message}}</li>

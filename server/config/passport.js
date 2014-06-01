@@ -24,21 +24,33 @@ module.exports = function (passport, config) {
   // use local strategy
   passport.use(new LocalStrategy({
       usernameField: 'email',
-      passwordField: 'password'
+      passwordField: 'password',
+      passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
-    function(email, password, done) {
+    function(req, email, password, done) {
+
+      // Use lower-case e-mails to avoid case-sensitive e-mail matching
+      if (email)
+        email = email.toLowerCase(); 
+
       User.findOne({ email: email }, function (err, user) {
         if (err) { return done(err);}
         if (!user) {
-          return done(null, false, { message: 'Unknown user' })
+          return done(null, false, req.flash('message', 'Unknown user'));
         }
         if (!user.authenticate(password)) {
-          return done(null, false, { message: 'Invalid password' })
+          return done(null, false, req.flash('message', 'Invalid password'));
         }
-        return done(null, user)
+
+      // if login succeed, add following info into session.
+        req.session.user = {'email': user.email, 'name': user.name, '_id': user._id};
+        req.session.loggedIn = true;
+
+        return done(null, user);
       })
     }
   ))
+
 
   // use twitter strategy
   passport.use(new TwitterStrategy({

@@ -3,6 +3,7 @@
  */
 
 var express = require('express')
+ // , expressValidator = require('express-validator')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
   , path = require('path')
@@ -59,6 +60,9 @@ module.exports = function (app, config, passport) {
     app.use(express.json());
     app.use(express.urlencoded());
   
+    // below is for express-validator
+    //app.use(expressValidator()); 
+
     app.use(express.methodOverride());
 
     // express/mongo session storage

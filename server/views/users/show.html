@@ -1,5 +1,13 @@
-{% extends '../layouts/default.html' %}
+{% extends './auth.html' %}
 
-{% block main %}
-  <h1>{{user.name}}</h1>
+{% block auth %}
+<div>
+  <h2>Welcome {{userName}}!</h2>
+  <p>This part will display the items received from DB.</p>
+</div>
+
+<div>
+  <a href="#">Add New Item</a>
+  <a href="#">Save &amp; Publish</a>	
+</div>
 {% endblock %}

@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
   //, _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook', 'google']
+  , authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 /**
  * User Schema
@@ -23,8 +23,27 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   github: {},
-  google: {}
-})
+  google: {},
+
+  items: [ItemSchema]
+});
+
+ /**
+ * Item Schema
+ */
+
+var ItemSchema = new Schema({
+  itemName: {type: String, required: true}, //need to validate the length of string, e.g.,1~50
+  itemCategory: {type: String, required: true}, //need to validate the length of string, e.g.,1~10
+  itemImage: Buffer,
+  itemUnit: {type: String, required: true}, //need to validate the length of string, e.g.,1~10
+  itemOldPrice: {type: Number, required: true, min: 0.00, max: 10000.00}, //need to validate the input is numeric
+  itemNewOrice: {type: Number, required: true, min: 0.00, max: 10000.00}, //need to validate the input is numeric
+  save: Number,  //need to validate the input is numeric
+  validStartDate: {type: Date, required: true}, //need to validate this date is after Date.now
+  validEndDate: {type: Date, required: true},
+  lastModified: {type: Date, 'default': Date.now}
+});
 
 /**
  * Virtuals: Mongoose supports virtual attributes. Virtual attributes are attributes
@@ -80,7 +99,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  */
 
 UserSchema.pre('save', function(next) {
-  if (!this.isNew) return next()
+  if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password)
     && authTypes.indexOf(this.provider) === -1)
